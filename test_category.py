@@ -1,10 +1,14 @@
+import pytest
 import unittest
 
 from category import Category
 
 class TestCategory(unittest.TestCase):
     def test_name_is_required(self):
-        with self.assertRaises(TypeError):
+        with pytest.raises(TypeError, match="missing 1 required positional argument: 'name'"):
+            Category()
+    def test_name_must_be_a_string(self):
+        with self.assertRaisesRegex(TypeError, "missing 1 required positional argument: 'name'"):
             Category()
     def test_name_must_be_less_than_255_characters(self):
         with self.assertRaises(ValueError):
