@@ -34,5 +34,9 @@ class TestCategory(unittest.TestCase):
         self.assertEqual(category.description, "")
         self.assertTrue(category.is_active)
 
+        assert category.name == "Test Category"
+        assert category.description == ""
+        assert category.is_active == True
+
 if __name__ == "__main__":
     unittest.main()
