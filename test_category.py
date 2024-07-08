@@ -1,5 +1,6 @@
 import pytest
 from uuid import UUID
+import uuid
 
 from category import Category
 
@@ -53,3 +54,34 @@ class TestActiveCategory:
         category = Category(name="Test Category", is_active=True)
         category.activate()
         assert category.is_active == True
+
+class TestDeactiveCategory:
+    def test_deactivate_inactivated_category(self):
+        category = Category(name="Test Category", is_active=False)
+        category.deactivate()
+        assert category.is_active == False
+    def test_deactivate_activated_category(self):
+        category = Category(name="Test Category", is_active=True)
+        category.deactivate()
+        assert category.is_active == False
+
+class TestCategoryEquality:
+    def test_equality_with_same_id(self):
+        common_id = uuid.uuid4()
+        category1 = Category(name="Test Category", id=common_id)
+        category2 = Category(name="Test Category", id=common_id)
+        assert category1 == category2
+    def test_equality_with_different_id(self):
+        category1 = Category(name="Test Category", id=uuid.uuid4())
+        category2 = Category(name="Test Category", id=uuid.uuid4())
+        assert category1 != category2
+    def test_equality_with_different_classes(self):
+        class Dummy:
+            pass
+
+        commom_id = uuid.uuid4()
+        dummy = Dummy()
+        dummy.id = commom_id
+        category1 = Category(name="Test Category 1", id=commom_id)
+        
+        assert category1 != dummy
