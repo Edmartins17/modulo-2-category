@@ -22,11 +22,17 @@ class Category:
     def update_category(self, name, description):
         self.name = name
         self.description = description
-        self.validate(self)
+        self.validate()
         
+    def activate(self):
+        self.is_active = True
+
+        self.validate()
+
+    
     def validate(self):
         if not self.name:
-            raise TypeError("Name cannot be empty")
+            raise ValueError("Name cannot be empty")
         if len(self.name) > 255:
             raise ValueError("Name must be less than 255 characters")
         
