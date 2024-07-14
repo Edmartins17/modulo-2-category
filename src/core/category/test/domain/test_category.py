@@ -2,7 +2,7 @@ import pytest
 from uuid import UUID
 import uuid
 
-from category import Category
+from src.core.category.domain.category import Category
 
 class TestCategory():
     def test_name_must_be_a_string_required(self):
